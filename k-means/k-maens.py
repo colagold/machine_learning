@@ -78,13 +78,24 @@ def k_means(k,dataset):
     print(new_cluster)
     return new_cluster,new_point
 
-
+def load_data(path):
+    res_list=[]
+    with open(path, "r", encoding="utf-8") as file:
+        for line in file.readlines():
+            line = list(map(float,line.strip("\n").split(' '))) # 去掉列表中每一个元素的换行符
+            print(line)
+            res_list.append(line)
+    return res_list
 
 if __name__  == '__main__':
     k=int(input("请输入k值："))
     #[[6, 6], [-6, -6], [6, -6]]
     #[[6,6],[3,3],[6,3]]
-    dataset=generate_data.get_data_set(100,[[6,6],[3,3],[6,3]])
+    # 读取文本数据
+    dataset=load_data("data.txt")
+
+    #自定义生成数据
+    # dataset=generate_data.get_data_set(100,[[6,6],[3,3],[6,3]])
     cluster,point=k_means(k,dataset)
     print(cluster)
     x=[[] for i in range(k) ]
