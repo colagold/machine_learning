@@ -10,7 +10,8 @@ def distance(x, u):
     return np.linalg.norm(x - u)
 
 def get_cluster(k, dataset):
-    k_point=random_point(k,dataset) #初始化类中心，以后类中心都存储在这
+    k_point=chose_point(dataset,[0,1,15,16])  #人为指定类中心，数组元素表示下标
+    #k_point=random_point(k,dataset) #随机初始化类中心，以后类中心都存储在这
     cluster=[[] for i in range(k)]
     for i in range(len(dataset)):  ##遍历所有的点
         distances=[]
@@ -39,6 +40,11 @@ def random_point(k, dataset):
     for i in range(k):
         points.append(dataset[int(size*random.random())])
     return points
+
+def chose_point(dataset,intex_list):
+    points=list(map(lambda index: dataset[index],intex_list))
+    return points
+
 
 
 def get_avg_vector(cluster_list,k_point):
@@ -93,6 +99,8 @@ if __name__  == '__main__':
     #[[6,6],[3,3],[6,3]]
     # 读取文本数据
     dataset=load_data("data.txt")
+
+    #po=chose_point(dataset,[1,4])
 
     #自定义生成数据
     # dataset=generate_data.get_data_set(100,[[6,6],[3,3],[6,3]])
